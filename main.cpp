@@ -1,4 +1,5 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<string.h>
 using namespace std;
 
 const int ALPHA_SIZE = 26;
@@ -14,7 +15,7 @@ struct trienode
     }
 };
 
-void insert(trienode* root, string key)
+void add_book(trienode* root, string key)
 {
     trienode* pcrawl = root;
     for(int i=0; i<key.size(); i++)
@@ -27,7 +28,7 @@ void insert(trienode* root, string key)
     pcrawl -> end_of_word = true;
 }
 
-bool search(trienode* root, string key)
+bool search_book(trienode* root, string key)
 {
     trienode* pcrawl = root;
     for(int i=0; i<key.size(); i++)
@@ -57,7 +58,7 @@ int main()
             string s; 
             cout<<"Enter Book's Name: "<<endl;
             cin>>s;
-            insert(root, s);
+            add_book(root, s);
             cout<<s<<" added to library!"<<endl;
         }
         else if(ch==2)
@@ -65,7 +66,7 @@ int main()
             string s;
             cout<<"Enter Book's Name"<<endl;
             cin>>s;
-            if(search(root, s))
+            if(search_book(root, s))
             {
                 cout<<s<<" found in library!"<<endl;
             }
@@ -79,5 +80,4 @@ int main()
     } while(ch);
     
     
-
 }
