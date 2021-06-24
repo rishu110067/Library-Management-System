@@ -1,5 +1,5 @@
-#include<iostream>
-#include<string.h>
+#include <iostream>
+#include <algorithm>
 using namespace std;
 
 const int ALPHA_SIZE = 26;
@@ -58,6 +58,7 @@ int main()
             string s; 
             cout<<"Enter Book's Name: "<<endl;
             cin>>s;
+            transform(s.begin(), s.end(), s.begin(), ::tolower);
             add_book(root, s);
             cout<<s<<" added to library!"<<endl;
         }
@@ -66,6 +67,7 @@ int main()
             string s;
             cout<<"Enter Book's Name"<<endl;
             cin>>s;
+            transform(s.begin(), s.end(), s.begin(), ::tolower);
             if(search_book(root, s))
             {
                 cout<<s<<" found in library!"<<endl;
