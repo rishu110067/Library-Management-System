@@ -5,12 +5,13 @@ using namespace std;
 
 #include "struct.h"
 #include "trie.h"
-
+#include "fenwick.h"
 
 int main()
 {
     int size=100;
-    struct Library L(size);
+    Library L(size);
+    Fenwick F(size);
     struct trienode* root = new trienode;
 
     cout<<endl<<"Library of size "<<size<<" created!"<<endl;
@@ -22,6 +23,7 @@ int main()
         cout<<"0. Exit"<<endl;
         cout<<"1. Add a book"<<endl;
         cout<<"2. Search a book"<<endl;
+        cout<<"3. Find number of books between 2 Shelf No."<<endl;
         cin>>ch;
 
         if(ch==1)
@@ -34,16 +36,21 @@ int main()
             int x;
             cout<<"Enter Shelf No. to place the book: "<<endl;
             cin>>x;
-
-            if(L.shelf[x]==1)
+            
+            if(x<0 || x>=size)
             {
-                cout<<"Another Book is already at this place"<<endl;
+                cout<<"Invalid Shelf No.!"<<endl;
+            }
+            else if(L.shelf[x]==1)
+            {
+                cout<<"Another Book is already at this place!"<<endl;
             }
             else
             {
                 add_book(root, s, x);
                 L.shelf[x]=1;
-                cout<<s<<" added to library at Shelf No. "<<x<<endl;
+                F.update(x,1);
+                cout<<s<<" added to library at Shelf No. "<<x<<" !"<<endl;
             }
         }
         else if(ch==2)
@@ -56,11 +63,26 @@ int main()
             int x = search_book(root, s);
             if(x!=-1)
             {
-                cout<<s<<" found in library at Shelf No. "<<x<<endl;
+                cout<<s<<" found in library at Shelf No. "<<x<<" !"<<endl;
             }
             else 
             {
                 cout<<s<<" not found in library!"<<endl;
+            }
+        }
+        else if(ch==3)
+        {
+            int l,r; 
+            cout<<"Enter left and right Shelf No."<<endl;
+            cin>>l>>r;
+
+            if(r<l || l<0 || r>=size)
+            {
+                cout<<"Invalid Shelf No.!"<<endl;
+            }
+            else
+            {
+                cout<<F.sum(l,r)<<" books between Shelf No. "<<l<<" and "<<r<<" !"<<endl;
             }
         }
         else break;
