@@ -28,6 +28,7 @@ int main()
         cout<<"2. Search a book"<<endl;
         cout<<"3. Find number of books between 2 Shelf No."<<endl;
         cout<<"4. Swap books kept at two shelf positions"<<endl;
+        cout<<"5. Remove a book"<<endl;
         cin>>ch;
 
         if(ch==1)
@@ -116,6 +117,27 @@ int main()
                 }
                 cout<<"Books at Shelf No. "<<x<<" and "<<y<<" Swapped!"<<endl;
             }
+        }
+        else if(ch==5)
+        {
+            string s;
+            cout<<"Enter Book's Name"<<endl;
+            cin>>s;
+            transform(s.begin(), s.end(), s.begin(), ::tolower);
+
+            int x = search_book(root, s);
+            if(x==-1)
+            {
+                cout<<s<<" not present in the library!"<<endl;
+            }
+            else
+            {
+                L.shelf[x]="#";
+                F.update(x,-1);
+                add_book(root, s, -1);
+                cout<<s<<" removed from shelf no. "<<x<<" !"<<endl;
+            }
+
         }
         else break;
         
