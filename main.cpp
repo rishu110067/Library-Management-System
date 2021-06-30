@@ -1,11 +1,14 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <queue>
+#include <list>
 using namespace std;
 
 #include "struct.h"
 #include "trie.h"
 #include "fenwick.h"
+#include "hopcroftKarp.h"
 
 int main()
 {
@@ -24,6 +27,7 @@ int main()
         cout<<"1. Add a book"<<endl;
         cout<<"2. Search a book"<<endl;
         cout<<"3. Find number of books between 2 Shelf No."<<endl;
+        cout<<"4. Swap books kept at two shelf positions"<<endl;
         cin>>ch;
 
         if(ch==1)
@@ -36,19 +40,19 @@ int main()
             int x;
             cout<<"Enter Shelf No. to place the book: "<<endl;
             cin>>x;
-            
+
             if(x<0 || x>=size)
             {
                 cout<<"Invalid Shelf No.!"<<endl;
             }
-            else if(L.shelf[x]==1)
+            else if(L.shelf[x]!="#")
             {
                 cout<<"Another Book is already at this place!"<<endl;
             }
             else
             {
                 add_book(root, s, x);
-                L.shelf[x]=1;
+                L.shelf[x]=s;
                 F.update(x,1);
                 cout<<s<<" added to library at Shelf No. "<<x<<" !"<<endl;
             }
@@ -83,6 +87,34 @@ int main()
             else
             {
                 cout<<F.sum(l,r)<<" books between Shelf No. "<<l<<" and "<<r<<" !"<<endl;
+            }
+        }
+        else if(ch==4)
+        {
+            int x,y; 
+            cout<<"Enter the two Shelf No."<<endl;
+            cin>>x>>y;
+            
+            if(x<0 || x>=size || y<0 || y>=size)
+            {
+                cout<<"Invalid Shelf No.!"<<endl;
+            }
+            else
+            {
+                swap(L.shelf[x], L.shelf[y]);
+                if(L.shelf[x]!="#") 
+                {
+                    add_book(root, L.shelf[x], x);
+                    F.update(x,1);
+                    F.update(y,-1);
+                }
+                if(L.shelf[y]!="#") 
+                {
+                    add_book(root, L.shelf[y], y);
+                    F.update(x,-1);
+                    F.update(y,1);
+                }
+                cout<<"Books at Shelf No. "<<x<<" and "<<y<<" Swapped!"<<endl;
             }
         }
         else break;

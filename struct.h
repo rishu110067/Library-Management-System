@@ -12,11 +12,11 @@ struct Book
 struct Library
 {
     int size;
-    vector<int> shelf;
+    vector<string> shelf;
     vector<struct Book> book_id; 
     Library(int size)
     {
-        shelf.resize(size);
+        shelf.resize(size,"#");
         book_id.resize(size);
     }
 };
