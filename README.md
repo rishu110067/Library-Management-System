@@ -1,5 +1,5 @@
 # Library-Managememt-System
-Using various data structures and algorithms to ease the process of managing a library.
+It is a Menu-Driven Runtime Program that uses various Data Structures and Algorithms to ease the process of managing a library.
 
 ## Features:
 ### 1. Add a book 
@@ -22,7 +22,7 @@ Then, it swaps the books that were kept at those positions.
 It takes the book name as input and removes the book from library. 
 It also tells the shelf no. from which the book was removed.
 
-### 5. Match people with books they want 
+### 6. Match people with books they want 
 It first takes a number as input i.e. number of people who wants book from library. 
 Then, for every person, it takes a number _k_ and a set of books of size _k_ as input out of which one book will be allocated to this person.
 Then it allocates one book to every person in such a way that maximum number of people can get a book that they want.   
