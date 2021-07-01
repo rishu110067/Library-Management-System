@@ -1,8 +1,3 @@
-//#include <bits/stdc++.h>
-//using namespace std;
-
-// Hopcroft Karp algorithm for Maximum Bipartite Matching
-
 #ifndef HOPCROFTKARP_H
 #define HOPCROFTKARP_H
 
@@ -111,24 +106,3 @@ int BipGraph::hopcroftKarp()
 }
 
 #endif
-
-/*
-int main()
-{
-	BipGraph g(5, 4);
-    g.addEdge(1, 2);
-    g.addEdge(1, 3);
-    g.addEdge(3, 2);
-    g.addEdge(4, 2);
-    g.addEdge(4, 4);
-	g.addEdge(5, 1);
-	g.addEdge(2, 1);
-
-	int mbm = g.hopcroftKarp();
-	cout<<mbm<<endl;
-	for(int i=1; i<=5; i++)
-	{
-		cout<<i<<" -> "<<g.pairU[i]<<endl;
-	}
-}
-*/

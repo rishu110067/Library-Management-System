@@ -3,6 +3,8 @@
 #include <vector>
 #include <queue>
 #include <list>
+#include <map>
+#include <set>
 using namespace std;
 
 #include "struct.h"
@@ -10,14 +12,17 @@ using namespace std;
 #include "fenwick.h"
 #include "hopcroftKarp.h"
 
+void MaxBipMatch(vector<string> v[], int n);
+
+int siz=100;   
+Library L(siz);
+Fenwick F(siz);
+struct trienode* root = new trienode;
+
 int main()
 {
-    int size=100;
-    Library L(size);
-    Fenwick F(size);
-    struct trienode* root = new trienode;
 
-    cout<<endl<<"Library of size "<<size<<" created!"<<endl;
+    cout<<endl<<"Library of size "<<siz<<" created!"<<endl;
 
     int ch=0;
     do
@@ -29,6 +34,7 @@ int main()
         cout<<"3. Find number of books between 2 Shelf No."<<endl;
         cout<<"4. Swap books kept at two shelf positions"<<endl;
         cout<<"5. Remove a book"<<endl;
+        cout<<"6. Match people with books they want"<<endl;
         cin>>ch;
 
         if(ch==1)
@@ -42,7 +48,7 @@ int main()
             cout<<"Enter Shelf No. to place the book: "<<endl;
             cin>>x;
 
-            if(x<0 || x>=size)
+            if(x<0 || x>=siz)
             {
                 cout<<"Invalid Shelf No.!"<<endl;
             }
@@ -81,7 +87,7 @@ int main()
             cout<<"Enter left and right Shelf No."<<endl;
             cin>>l>>r;
 
-            if(r<l || l<0 || r>=size)
+            if(r<l || l<0 || r>=siz)
             {
                 cout<<"Invalid Shelf No.!"<<endl;
             }
@@ -96,7 +102,7 @@ int main()
             cout<<"Enter the two Shelf No."<<endl;
             cin>>x>>y;
             
-            if(x<0 || x>=size || y<0 || y>=size)
+            if(x<0 || x>=siz || y<0 || y>=siz)
             {
                 cout<<"Invalid Shelf No.!"<<endl;
             }
@@ -139,8 +145,92 @@ int main()
             }
 
         }
+        else if(ch==6)
+        {
+            int n;
+            cout<<"Enter number of people: ";
+            cin>>n;
+            vector<string> v[n+1];
+            for(int i=1; i<=n; i++)
+            {
+                cout<<"Person "<<i<<endl;
+                
+                cout<<"Enter number of Books: ";
+                int k; cin>>k;
+
+                cout<<"Enter "<<k<<" Book Names: ";
+                for(int j=1; j<=k; j++)
+                {
+                    string s; cin>>s;
+                    transform(s.begin(), s.end(), s.begin(), ::tolower);
+                    v[i].push_back(s);
+                }
+            }
+
+            MaxBipMatch(v,n);
+        }
         else break;
         
     } while(ch);
-    
+
+    cout<<"Library Management Program Ended!"<<endl;
+    return 0;
+}
+
+
+void MaxBipMatch(vector<string> v[], int n)
+{
+    map<string, int> m;
+    int k=0;
+	for(int i=1; i<=n; i++)
+    {
+        for(auto x:v[i])
+        {
+            if(m.find(x)==m.end())
+            {
+                k++;
+                m[x]=k;
+            }
+        }
+    }
+
+    vector<string> book(k+1);
+    vector<string> np;
+    int fl=0;
+    for(auto x:m)
+    {
+        book[x.second]=x.first;
+        if(search_book(root, x.first)==-1) 
+        {
+            np.push_back(x.first);
+            m[x.first]=0;
+            fl=1;
+        }
+    }
+
+    if(fl)
+    {
+        cout<<endl;
+        cout<<"These books are not present in the library: ";
+        for(auto x:np) cout<<x<<" "; 
+        cout<<endl;
+    }
+
+    BipGraph g(n, k);
+    for(int i=1; i<=n; i++)
+    {
+        for(auto x:v[i])
+        {
+            if(m[x]) g.addEdge(i,m[x]);
+        }
+    }
+
+    int mbm = g.hopcroftKarp();
+    cout<<endl;
+    cout<<mbm<<" Matchings possible! "<<endl;
+    for(int i=1; i<=n; i++)
+	{
+		if(g.pairU[i]) 
+            cout<<"Person "<<i<<" -> "<<book[g.pairU[i]]<<endl;
+	}
 }
