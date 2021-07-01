@@ -11,11 +11,11 @@ It takes the book name as input and tells if the book is present in the library 
 If present, it tells the shelf no. where the book is kept.
 
 ### 3. Find number of books between 2 shelf positions  
-It takes two shelf no.'s l and r as input.
+It takes two shelf no.'s _l_ and _r_ as input.
 Then, it finds the number of books kept between the two shelf positions in the Library.
 
 ### 4. Swap books kept at 2 shelf positions  
-It takes two shelf no.'s x and y as input.
+It takes two shelf no.'s _x_ and _y_ as input.
 Then, it swaps the books that were kept at those positions.
 
 ### 5. Remove a book 
