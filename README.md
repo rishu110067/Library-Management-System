@@ -1,4 +1,4 @@
-# Library-Managememt-System
+# Library-Management-System
 It is a Menu-Driven Runtime Program that uses various Data Structures and Algorithms to ease the process of managing a library.
 
 ## Features:
