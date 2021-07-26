@@ -35,6 +35,8 @@ int main()
         cout<<"4. Swap books kept at two shelf positions"<<endl;
         cout<<"5. Remove a book"<<endl;
         cout<<"6. Match people with books they want"<<endl;
+        cout<<endl;
+        cout<<"Enter your choice: ";
         cin>>ch;
 
         if(ch==1)
