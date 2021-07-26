@@ -32,7 +32,7 @@ Then it allocates one book to every person in such a way that maximum number of 
 For searching a book in the library.
 
 ### 2. Fenwick Tree
-For finding number of books between two shelf positions in the Library.
+For finding the number of books between two shelf positions in the Library.
 
 ### 3. Hopcroft Karp Algorithm
 For Maximum Bipartite Matching of people and books. 
