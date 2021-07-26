@@ -4,9 +4,9 @@
 struct Book
 {
     string name;
-    string author;
-    int price;
-    int id;
+    //string author;
+    //int price;
+    //int id;
 };
 
 struct Library
